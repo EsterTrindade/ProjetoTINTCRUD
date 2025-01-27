@@ -2,7 +2,11 @@
 
     namespace PHP\Modelo;
     require_once('..\Funcionario.php');
+    require_once('..\DAO\Conexao.php');
+    require_once('..\DAO\Inserir.php');
     use PHP\Modelo\Funcionario;
+    use PHP\Modelo\DAO\Conexao;
+    use PHP\Modelo\DAO\Inserir;
 
 ?>
 
@@ -41,12 +45,13 @@
             </div>
 
             <div class="mb-3">
-                <label for="lSalario" class="form-label">Sa</label>
+                <label for="lSalario" class="form-label">Salário</label>
                 <input type="text" class="form-control" id="tSalario" name="tSalario" placeholder="Insira o seu salário">
             </div>
 
-            <button type="submit">Cadastrar
+            <button type="submit" class="btn btn-primary">Cadastrar
                 <?php
+                    $conexao = new Conexao(); //Conectar no Banco.
                     if(isset($_POST['tCPF']) && isset($_POST['tNome']) && isset($_POST['tTelefone']) && isset($_POST['tEndereco']) && isset($_POST['tSalario'])){
                         $cpf = $_POST['tCPF'];
                         $nome = $_POST['tNome'];
@@ -55,16 +60,17 @@
                         $salario = $_POST['tSalario'];
                    
 
-                        $cliente1 = new Cliente($cpf, $nome, $telefone, $endereco, $salario);
+                    $inserir = new Inserir();
+                    echo $inserir->cadastrarFuncionario($conexao, $cpf, $nome, $telefone, $endereco, $salario);
+
                     };
                 ?>
             </button>
+            <button type="button" class="btn btn-primary">Consultar</button>
+            <button type="button" class="btn btn-primary">Atualizar</button>
+            <button type="button" class="btn btn-danger">Excluir</button>
         </form>
-
-        <?php
-            echo $cliente1->imprimir();
-        ?>
-       
+    
     </body>
 </html>
 

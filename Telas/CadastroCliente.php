@@ -2,7 +2,11 @@
 
     namespace PHP\Modelo;
     require_once('..\Cliente.php');
+    require_once('..\DAO\Conexao.php');
+    require_once('..\DAO\Inserir.php');
     use PHP\Modelo\Cliente;
+    use PHP\Modelo\DAO\Conexao;
+    use PHP\Modelo\DAO\Inserir;
 
 ?>
 
@@ -45,8 +49,9 @@
                 <input type="text" class="form-control" id="tTotal" name="tTotal" placeholder="Insira o total">
             </div>
 
-            <button type="submit">Cadastrar
+            <button type="submit" class="btn btn-primary">Cadastrar
                 <?php
+                    $conexao = new Conexao(); //Conectar no Banco.
                     if(isset($_POST['tCPF']) && isset($_POST['tNome']) && isset($_POST['tTelefone']) && isset($_POST['tEndereco']) && isset($_POST['tTotal'])){
                         $cpf = $_POST['tCPF'];
                         $nome = $_POST['tNome'];
@@ -55,16 +60,18 @@
                         $total = $_POST['tTotal'];
                     
                     //Instanciar
-                    $cliente1 = new Cliente($cpf, $nome, $telefone, $endereco, $total);
+                    $inserir = new Inserir();
+                    echo $inserir->cadastrarCliente($conexao, $cpf, $nome, $telefone, $endereco, $total);
 
                     };
                 ?>
             </button>
-        </form>
 
-        <?php
-            echo $cliente1->imprimir();
-        ?>
+            <button type="button" class="btn btn-primary">Consultar</button>
+            <button type="button" class="btn btn-primary">Atualizar</button>
+            <button type="button" class="btn btn-danger">Excluir</button>
+        </form>
+            
        
     </body>
 </html>
