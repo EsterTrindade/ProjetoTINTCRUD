@@ -14,7 +14,7 @@
                 while($dados = mysqli_fetch_Array($result)){
                     if($dados['codigo' == $cpf])
                     {
-                        echo "<br>CPF: ".$dados['cpf'].
+                        echo "<br>CPF: ".$dados['codigo'].
                             "<br>Nome: ".$dados['nome'].
                             "<br>Telefone".$dados['telefone'].
                             "<br>Endereço:".$dados['endereco'].
@@ -29,6 +29,30 @@
                 echo $erro;
             }
         }//Fim do consultar cliente individual
+
+        function ConsultarFuncionarioIndividual(Conexao $conexao, int $cpf)
+        {
+            try{
+                $conn = $conexao->conectar();
+                $sql = "select * from funcionario where codigo = '$cpf'";
+                $result = mysqli_query($conn, $sql);
+                while($dados = mysqli_fetch_Array($result)){
+                    if($dados['codigo' == $cpf])
+                    {
+                        echo "<br>CPF: ".$dados['codigo'].
+                        "<br>Nome: ".$dados['nome'].
+                        "<br>Telefone".$dados['telefone'].
+                        "<br>Endereço:".$dados['endereco'].
+                        "<br>Salário: R$".$dados['salario'];
+                        return;
+                    }
+                    return "CPF inválido!";
+                }
+            }catch(Except $erro)
+            {
+                echo $erro;
+            }
+        }//Fim do consultar Funcionario individual
 
     }//Fim da Classe
 

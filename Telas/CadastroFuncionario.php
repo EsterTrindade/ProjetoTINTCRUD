@@ -23,6 +23,10 @@
 
     <body>
 
+        <a href="Menu.php"><button type="button" class="btn btn-primary">Voltar</button></a>
+
+        <br><br>
+
         <form method="POST">
             <div class="mb-3">
                 <label for="lCpf" class="form-label">CPF</label>
@@ -66,9 +70,6 @@
                     };
                 ?>
             </button>
-            <button type="button" class="btn btn-primary">Consultar</button>
-            <button type="button" class="btn btn-primary">Atualizar</button>
-            <button type="button" class="btn btn-danger">Excluir</button>
         </form>
     
     </body>
